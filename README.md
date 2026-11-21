@@ -1,8 +1,38 @@
-# GirlTHing AI Lab — Blok 2
+# GirlTHing AI Lab — Blok 2: Studentski asistent
 
-Materijali za radionice Bloka 2 (LLM, RAG, chatbot).
+| Datoteka | Šta je |
+|---|---|
+| `data/` | dokumenti baze znanja (.pdf, .md, .txt) |
+| `rag.py` | RAG logika: učitavanje, chunking, embeddings, pretraga, odgovor (R6) |
+| `app.py` | web aplikacija u Streamlitu (R7) |
+| `eval.py` | mjerenje kvaliteta na test setu (R7) |
+| `test_set.json` | 10 pitanja s očekivanim odgovorima i izvorima |
 
-- `data/` — dokumenti baze znanja Studentskog asistenta (.md, .txt ili .pdf)
-- `rag.py` — RAG modul iz Radionice 6 (koristi se i na Radionici 7)
+## Pokretanje aplikacije
 
-Nove dokumente samo dodajte u `data/`. `rag.load_or_build_index` sam primijeti promjenu i ponovo napravi indeks.
+**GitHub Codespaces (ništa se ne instalira):** na GitHubu kliknite *Code → Codespaces → Create codespace on master*. Paketi se instaliraju sami. U datoteku `.env` upišite ključ, pa u terminalu:
+
+```bash
+streamlit run app.py
+```
+
+**Lokalno (VS Code):**
+
+```bash
+pip install -r requirements.txt
+cp .env.example .env        # Windows: copy .env.example .env
+# upišite ključ u .env
+streamlit run app.py        # ako ne radi: python -m streamlit run app.py
+```
+
+Aplikacija se otvara na http://localhost:8501.
+
+## Evaluacija
+
+```bash
+python eval.py
+```
+
+Cilj: bar 8/10. Pokrenite nakon svake izmjene prompta ili dokumenata.
+
+Nove dokumente samo dodajte u `data/` — indeks (`index.npz`) se sam ponovo napravi.
